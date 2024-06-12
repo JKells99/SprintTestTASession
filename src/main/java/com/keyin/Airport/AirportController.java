@@ -7,18 +7,29 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/airports")
 public class AirportController {
 
     @Autowired
     private AirportService airportService;
 
-    @GetMapping("/airports")
+    @GetMapping("/allAirports")
     public List<Airport> getAllAirports(){
         return airportService.getAirports();
     }
 
-    @PostMapping("/airport")
+    @PostMapping("")
     public Airport createAirport(@RequestBody Airport newAirport){
         return airportService.createAirport(newAirport);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAirport(@PathVariable Long id) {
+        airportService.deleteAirport(id);
+    }
+
+    @PutMapping("/{id}")
+    public Airport updateAirport(@PathVariable Long id, @RequestBody Airport newAirport ) {
+        return  airportService.updateAirport(id,newAirport);
     }
 }
